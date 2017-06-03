@@ -27,7 +27,8 @@
               formData[key] = input.value;
             }
           } else if (type === 'SELECT') {
-            formData[key] = input.options[input.selectedIndex].text;
+            const option = input.options[input.selectedIndex];
+            if (option.value.length && !option.disabled) formData[key] = option.text;
           } else if (type === 'email') {
             if (_validateEmail(input.value)) formData[key] = input.value;
           } else if (type === 'url') {
