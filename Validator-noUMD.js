@@ -29,7 +29,7 @@
             }
           } else if (type === 'SELECT') {
             const option = input.options[input.selectedIndex];
-            if (option.value.length && !option.disabled) formData[key] = option.text;
+            if (option.value.length && !option.disabled) formData[key] = option.value;
           } else if (type === 'email') {
             if (_validateEmail(input.value)) formData[key] = input.value;
           } else if (type === 'url') {
