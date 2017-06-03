@@ -19,6 +19,7 @@
     const Validation = new Promise((resolve, reject) => {
       for (const input of formInputs) {
         const key = input.getAttribute('name');
+        const name = input.dataset.name || key;
         const type = input.getAttribute('type') || input.tagName;
 
         if (type !== 'submit') {
@@ -38,8 +39,8 @@
             if (input.value.length && _checkLength(input)) formData[key] = input.value;
           }
 
-          if (formData[key]) errors.delete(key);
-          else if (!errors.has(key)) errors.add(key);
+          if (formData[key]) errors.delete(name);
+          else if (!errors.has(key)) errors.add(name);
         }
       }
 
