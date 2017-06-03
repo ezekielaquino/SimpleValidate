@@ -17,6 +17,8 @@
   'use strict';
 
   function Validate(form) {
+    const inputs = form.querySelectorAll('input');
+    const selects = form.querySelectorAll('select');
     const formInputs = [...inputs, ...selects];
     const formData = {};
     const errors = new Set([]);
