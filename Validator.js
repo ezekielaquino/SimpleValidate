@@ -1,6 +1,6 @@
 /**
  * SIMPLEVALIDATOR (AKA VALIDATOR3000)
- * http://github.com/ezekielaquino/SimpleValidator
+ * http://github.com/ezekielaquino/SimpleValidate
  * Simple form validator that also exposes your user's shortcomings
  * MIT License
  */

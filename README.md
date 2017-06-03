@@ -2,6 +2,7 @@
 
 Simple form validation that also exposes your user's shortcomings :D
 
+[GET VALIDATING! -> DEMO](https://ezekielaquino.github.io/SimpleValidate/)
 
 ## Features
 
@@ -12,6 +13,8 @@ Simple form validation that also exposes your user's shortcomings :D
 
 
 ## How to
+
+`npm install simplevalidate` or just include the appropriate scripts.
 
 Simple: pass in a form element into `Validate()`. It will loop through all inputs and selects and returns a promise. If there's an error, then it will return the names of the inputs as an array; otherwise it will return the form data as an object.
 
