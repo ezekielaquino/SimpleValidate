@@ -19,10 +19,14 @@ Simple form validation that also exposes your user's shortcomings :D
 Simple: pass in a form element into `Validate()`. It will loop through all inputs and selects and returns a promise. If there's an error, then it will return the names of the inputs as an array; otherwise it will return the form data as an object.
 
 ```html
-    <!-- You can specify min/max length via data-attributes -->
+    <!-- You can specify the following with data attributes:
+        data-minlength -> minimum number of characters
+        data-maxlneght -> maximum number of characters
+        data-name -> The label/name of the error, otherwise [name] will be used
+     -->
     <fieldset>
         <label>Some input label</label>
-        <input type="text" name="Input" data-minlength="5" data-maxlength="15">
+        <input type="text" name="input" data-name="Some input" data-minlength="5" data-maxlength="15">
     </fieldset>
 ```
 
