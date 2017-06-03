@@ -1,0 +1,6 @@
+npm-debug.log
+.eslintrc.json
+*.lock
+bower.json
+/node_modules
+/assets
