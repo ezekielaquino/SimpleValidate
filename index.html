@@ -1,3 +1,6 @@
+<!--
+  FOR DEMO PURPOSES ONLY!
+-->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,8 +8,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-      label {
-        display: block;
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        height: 100vh;
+        background: #f0f0f0;
+        -webkit-font-smoothing: antialiased;
+        display: flex;
+        font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 1.2rem;
+        padding: 1rem;
+        font-weight: normal;
+        color: #111;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      label, select {
+        transition: color 0.5s;
+      }
+
+      .string label {
+        position: absolute;
+        padding: 1rem;
+        pointer-events: none;
+        top: 0;
+        transition: opacity 0.15s;
+      }
+
+      .check {
+        padding: 1rem 0.5rem;
+        display: flex;
+      }
+
+      .check div {
+        padding: 1rem 0.5rem;
+        width: 50%;
+      }
+
+      input[type="radio"],
+      input[type="checkbox"] {
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        -webkit-appearance: none;
+        width: 16px;
+        height: 16px;
+        outline: 0;
+        vertical-align: middle;
+        border-radius: 4px;
+        margin: 0 3px 0 0;
+      }
+
+      input[type="radio"] {
+        border-radius: 50%;
+      }
+
+      input[type="radio"]:checked,
+      input[type="checkbox"]:checked {
+        background: blue;
+        border: 5px solid white;
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
       }
 
       input[type='radio'] ~ label,
@@ -14,79 +83,194 @@
         display: inline-block;
       }
 
-      form.valid fieldset {
-        border: 1px solid green;
+      input[type='text'],
+      input[type='email'],
+      input[type='url'] {
+        padding: 1rem;
+        margin: 0;
+        width: 100%;
+        display: block;
+        border: 0;
+        outline: 0;
+        font: inherit;
+      }
+
+      .string input:focus ~ label,
+      .string input:not(:placeholder-shown) ~ label {
+        opacity: 0;
+      }
+
+      ::-webkit-input-placeholder {
+        color: transparent;
+      }
+
+      .select {
+        position: relative;
+      }
+
+      .select:after {
+        content: '⬇';
+        top: 50%;
+        transform: translateY(-50%);
+        position: absolute;
+        right: 1rem;
+        font-size: 0.8rem;
+        opacity: 0.7;
+        pointer-events: none;
+      }
+
+      select {
+        font: inherit;
+        padding: 1rem;
+        border: 0;
+        -webkit-appearance: none;
+        width: 100%;
+        background: transparent;
+        outline: 0;
+        color: inherit;
+      }
+
+      fieldset,
+      div[role="group"] {
+        border: 0;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      legend {
+        display: none;
       }
       
-      fieldset.error {
-        border: 1px solid red;
+      .is-submitted .error {
+        color: rgba(255, 0, 0, 0.7) !important;
+      }
+
+      .is-submitted button {
+        transform: translate3d(0, 100%, 0);
       }
 
       .message {
         color: green;
+        position: absolute;
+        bottom: 0rem;
+        width: 100%;
+        padding: 1rem 4rem;
+        font-size: 0.8rem;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 1.5s, color 0s 0.5s;
       }
 
-      .message--error {
+      .is-error .message {
         color: red;
+        transition: opacity 1.5s, color 0s 0s;
+      }
+
+      .is-submitted .message {
+        opacity: 1;
+      }
+
+      .form {
+        background: #fff;
+        color: #555;
+        width: 320px;
+        margin: auto;
+        position: relative;
+        padding-bottom: 4rem;
+        border-radius: 4px;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.14);
+      }
+
+      form button {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        background: blue;
+        color: white;
+        border: 0;
+        padding: 1rem;
+        font: inherit;
+        outline: 0;
+        border-bottom-right-radius: 4px;
+        border-bottom-left-radius: 4px;
+        transition: transform 0.5s;
+        cursor: pointer;
+      }
+
+      .link {
+        width: 100%;
+        text-align: center;
+        top: calc(100% + 1rem);
+        position: absolute;
+        text-decoration: underline;
+        font-size: 0.7rem;
       }
     </style>
   </head>
   <body>
 
-    <h1><a href="https://github.com/ezekielaquino/SimpleValidate">SimpleValidate</a></h1>
-    <small>a.k.a Validate3000</small>
+    <div class="form">
+      <h1><a href="https://github.com/ezekielaquino/SimpleValidate">SimpleValidate</a></h1>
+      <a href="https://github.com/ezekielaquino/SimpleValidate" class="link">Available on GitHub</a>
 
-    <form novalidate>
-      <fieldset>
-        <label>Name</label>
-        <input type="text" name="Name" data-minlength="2" placeholder="Minimum length of 2 here">
-      </fieldset>
+      <form novalidate autocomplete="off">
+        <fieldset class="string">
+          <input type="text" name="Name" data-minlength="2" placeholder="Minimum length of 2 here">
+          <label>Name</label>
+        </fieldset>
 
-      <fieldset>
-        <label>Email</label>
-        <input type="email" name="Email" placeholder="Validates emails too">
-      </fieldset>
+        <fieldset class="string">
+          <input type="email" name="Email" placeholder="Validates emails too">
+          <label>Email</label>
+        </fieldset>
 
-      <fieldset>
-        <label>URL</label>
-        <input type="url" name="URL" placeholder="Validates URLs too">
-      </fieldset>
+        <fieldset class="string">
+          <input type="url" name="URL" placeholder="Validates URLs too">
+          <label>URL</label>
+        </fieldset>
 
-      <fieldset>
-        <label>Select</label>
-        <select name="Select">
-            <option disabled selected> -- select an option -- </option>
-            <option value="SomeValue1">Option 1</option>
-            <option value="SomeValue2">Option 2</option>
-            <option value="SomeValue3">Option 3</option>
-        </select>
-      </fieldset>
+        <fieldset class="select">
+          <select name="Select">
+              <option disabled selected>Your location</option>
+              <option value="SomeValue1">Option 1</option>
+              <option value="SomeValue2">Option 2</option>
+              <option value="SomeValue3">Option 3</option>
+          </select>
+        </fieldset>
 
-      <fieldset>
-        <legend>Cheese</legend>
-        <input type="radio" name="Cheese" id="blueCheese" value="blueCheese">
-        <label for="blueCheese">Blue Cheese</label>
+        <div role="group" class="check">
+          <legend>Cheese</legend>
+          <div>
+            <input type="radio" name="Cheese" id="blueCheese" value="blueCheese">
+            <label for="blueCheese">Blue Cheese</label>
+          </div>
+          <div>
+            <input type="radio" name="Cheese" id="goudaCheese" value="goudaCheese">
+            <label for="goudaCheese">Gouda Cheese</label>
+          </div>
+        </div>
 
-        <input type="radio" name="Cheese" id="goudaCheese" value="goudaCheese">
-        <label for="goudaCheese">Gouda Cheese</label>
+        <div role="group" class="check">
+          <legend>Fruit</legend>
 
-        <input type="radio" name="Cheese" id="stinkyCheese" value="stinkyCheese">
-        <label for="stinkyCheese">Stinky Cheese</label>
-      </fieldset>
+          <div>
+            <input type="checkbox" name="Fruit" id="Cherry" value="Cherry" />
+            <label for="Cherry">Cherry</label>
+          </div>
+          <div>
+            <input type="checkbox" name="Fruit" id="Watermelon" value="Watermelon" />
+            <label for="Watermelon">Watermelon</label>
+          </div>
+        </div>
 
-      <fieldset>
-        <legend>Fruit</legend>
-        <input type="checkbox" name="Fruit" id="Cherry" value="Cherry" />
-        <label for="Cherry">Cherry</label>
+        <div class="message"></div>
 
-        <input type="checkbox" name="Fruit" id="Watermelon" value="Watermelon" />
-        <label for="Watermelon">Watermelon</label>
-      </fieldset>
-
-      <div class="message"></div>
-
-      <button>Submit</button>
-    </form>
+        <button>Submit</button>
+      </form>
+    </div>
 
   </body>
 
@@ -102,21 +286,28 @@
 
       message.innerHTML = '';
 
-      form.classList.remove('valid');
+      form.classList.remove('valid', 'is-error');
+      form.classList.add('is-submitted');
 
       for (const fieldset of fieldsets) {
         fieldset.classList.remove('error');
       }
 
+      setTimeout(() => {
+        form.classList.remove('is-submitted', 'is-error');
+      }, 2000);
+
       Validate(form)
         .then(function(data) {
           message.classList.remove('message--error');
-          message.innerHTML = 'Valid data! <pre>' + JSON.stringify(data) + '</pre>';
+          message.innerHTML = 'Valid data! See console';
+          console.log(JSON.stringify(data));
           form.classList.add('valid');
         })
         .catch(function(errors) {
+          form.classList.add('is-error');
           message.classList.add('message--error');
-          message.innerHTML = 'Please check the following: ' + errors.join(', ');
+          message.innerHTML = '<b>Please check</b> ' + errors.join(', ');
 
           for (const e of errors) {
             const inputs = document.querySelectorAll('[name='+ e +']');
