@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SimpleValidate</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      label {
+        display: block;
+      }
+
+      input[type='radio'] ~ label,
+      input[type='checkbox'] ~ label {
+        display: inline-block;
+      }
+
+      form.valid fieldset {
+        border: 1px solid green;
+      }
+      
+      fieldset.error {
+        border: 1px solid red;
+      }
+
+      .message {
+        color: green;
+      }
+
+      .message--error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1>Validate</h1>
+    <small>a.k.a Validate3000</small>
+
+    <form novalidate>
+      <fieldset>
+        <label>Name</label>
+        <input type="text" name="Name" data-minlength="2" placeholder="Minimum length of 2 here">
+      </fieldset>
+
+      <fieldset>
+        <label>Email</label>
+        <input type="email" name="Email" placeholder="Validates emails too">
+      </fieldset>
+
+      <fieldset>
+        <label>URL</label>
+        <input type="url" name="URL" placeholder="Validates URLs too">
+      </fieldset>
+
+      <fieldset>
+        <legend>Cheese</legend>
+        <input type="radio" name="Cheese" id="blueCheese" value="blueCheese">
+        <label for="blueCheese">Blue Cheese</label>
+
+        <input type="radio" name="Cheese" id="goudaCheese" value="goudaCheese">
+        <label for="goudaCheese">Gouda Cheese</label>
+
+        <input type="radio" name="Cheese" id="stinkyCheese" value="stinkyCheese">
+        <label for="stinkyCheese">Stinky Cheese</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Fruit</legend>
+        <input type="checkbox" name="Fruit" id="Cherry" value="Cherry" />
+        <label for="Cherry">Cherry</label>
+
+        <input type="checkbox" name="Fruit" id="Watermelon" value="Watermelon" />
+        <label for="Watermelon">Watermelon</label>
+      </fieldset>
+
+      <div class="message"></div>
+
+      <button>Submit</button>
+    </form>
+
+  </body>
+
+  <script src="Validator-noUMD.min.js"></script>
+  <script>
+    var form = document.querySelector('form');
+    var submit = form.querySelector('button');
+    var message = form.querySelector('.message');
+    var fieldsets = form.querySelectorAll('fieldset');
+
+    submit.addEventListener('click', function(event) {
+      event.preventDefault();
+
+      message.innerHTML = '';
+
+      form.classList.remove('valid');
+
+      for (const fieldset of fieldsets) {
+        fieldset.classList.remove('error');
+      }
+
+      Validate(form)
+        .then(function(data) {
+          message.classList.remove('message--error');
+          message.innerHTML = 'Valid data! <pre>' + JSON.stringify(data) + '</pre>';
+          form.classList.add('valid');
+        })
+        .catch(function(errors) {
+          message.classList.add('message--error');
+          message.innerHTML = 'Please check the following: ' + errors.join(', ');
+
+          for (const e of errors) {
+            const inputs = document.querySelectorAll('[name='+ e +']');
+
+            for (const input of inputs) {
+              input.parentElement.classList.add('error');
+            }
+          }
+        });
+    });
+  </script>
+</html>
