@@ -42,14 +42,12 @@
           } else if (type === 'url') {
             if (_validateURL(input.value)) formData[key] = input.value;
           } else {
-            console.log(_checkLength(input));
             if (_checkLength(input)) formData[key] = input.value;
           }
 
           if (formData[key]) errors.delete(name);
           else if (!errors.has(key) && !input.dataset.ignore) errors.add(name);
         }
-        console.log(formData, input, input.value); 
       }
 
       if (errors.size) reject(Array.from(errors));
