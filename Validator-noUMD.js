@@ -36,11 +36,11 @@
             if (_validateURL(input.value)) formData[key] = input.value;
           } 
           else {
-            if (input.value.length && _checkLength(input)) formData[key] = input.value;
+            if (_checkLength(input)) formData[key] = input.value;
           }
 
           if (formData[key]) errors.delete(name);
-          else if (!errors.has(key)) errors.add(name);
+          else if (!errors.has(key) && !input.dataset.ignore) errors.add(name);
         }
       }
 
@@ -58,7 +58,7 @@
 
     if (min && !max) return input.value.length > min;
     else if (!min && max) return input.value.length < max;
-    else return input.value.length > min && input.value.length < max;
+    else return input.value.length > 0;
   }
 
   function _validateEmail(email) {
