@@ -306,6 +306,9 @@
           form.classList.add('valid');
         })
         .catch(function(errors) {
+          console.warn('Whoops you got errors!');
+          console.debug(errors);
+
           for (const e of errors.inputs) {
             e.parentElement.classList.add('error');
           }
