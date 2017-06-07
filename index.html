@@ -219,22 +219,22 @@
 
       <form novalidate autocomplete="off">
         <fieldset class="string">
-          <input type="text" name="Name" data-minlength="2" placeholder="Minimum length of 2 here">
+          <input type="text" name="Name" data-minlength="2" placeholder="Minimum length of 2 here" required>
           <label>Name</label>
         </fieldset>
 
         <fieldset class="string">
-          <input type="email" name="Email" placeholder="Validates emails too">
+          <input type="email" name="Email" placeholder="Validates emails too" required>
           <label>Email</label>
         </fieldset>
 
         <fieldset class="string">
-          <input type="url" name="URL" placeholder="Validates URLs too">
+          <input type="url" name="URL" placeholder="Validates URLs too" required>
           <label>URL</label>
         </fieldset>
 
         <fieldset class="select">
-          <select name="Select">
+          <select name="Select" required>
               <option disabled selected>Your location</option>
               <option value="SomeValue1">Option 1</option>
               <option value="SomeValue2">Option 2</option>
@@ -245,11 +245,11 @@
         <div role="group" class="check">
           <legend>Cheese</legend>
           <div>
-            <input type="radio" name="Cheese" id="blueCheese" value="blueCheese">
+            <input type="radio" name="Cheese" id="blueCheese" value="blueCheese" required>
             <label for="blueCheese">Blue Cheese</label>
           </div>
           <div>
-            <input type="radio" name="Cheese" id="goudaCheese" value="goudaCheese">
+            <input type="radio" name="Cheese" id="goudaCheese" value="goudaCheese" required>
             <label for="goudaCheese">Gouda Cheese</label>
           </div>
         </div>
@@ -258,11 +258,11 @@
           <legend>Fruit</legend>
 
           <div>
-            <input type="checkbox" name="Fruit" id="Cherry" value="Cherry" />
+            <input type="checkbox" name="Fruit" id="Cherry" value="Cherry" required/>
             <label for="Cherry">Cherry</label>
           </div>
           <div>
-            <input type="checkbox" name="Fruit" id="Watermelon" value="Watermelon" />
+            <input type="checkbox" name="Fruit" id="Watermelon" value="Watermelon" required/>
             <label for="Watermelon">Watermelon</label>
           </div>
         </div>
@@ -306,17 +306,13 @@
           form.classList.add('valid');
         })
         .catch(function(errors) {
+          for (const e of errors.inputs) {
+            e.parentElement.classList.add('error');
+          }
+
           form.classList.add('is-error');
           message.classList.add('message--error');
-          message.innerHTML = '<b>Please check</b> ' + errors.join(', ');
-
-          for (const e of errors) {
-            const inputs = document.querySelectorAll('[name='+ e +']');
-
-            for (const input of inputs) {
-              input.parentElement.classList.add('error');
-            }
-          }
+          message.innerHTML = '<b>Please check</b> ' + errors.names.join(', ');
         });
     });
   </script>
