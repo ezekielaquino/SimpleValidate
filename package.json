@@ -1,7 +1,7 @@
 {
   "name": "simplevalidate",
-  "version": "0.0.6",
-  "description": "Simple form validator that also exposes your user's shortcomings",
+  "version": "0.0.7",
+  "description": "Simple and minimal form validation",
   "keywords": [
     "validate",
     "validator",
@@ -11,8 +11,5 @@
   "main": "Validator.js",
   "repository": "https://github.com/ezekielaquino/SimpleValidate",
   "homepage": "https://ezekielaquino.github.io/SimpleValidate/",
-  "author": "Ezekiel Aquino <ezekielaquino@gmail.com>",
-  "dependencies": {
-    "simplevalidate": "^0.0.4"
-  }
+  "author": "Ezekiel Aquino <ezekielaquino@gmail.com>"
 }
