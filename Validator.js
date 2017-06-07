@@ -46,7 +46,7 @@
           }
 
           if (formData[key]) errors.delete(name);
-          else if (!errors.has(key) && !input.dataset.ignore) errors.add(name);
+          else if (!errors.has(key) && input.hasClass('required')) errors.add(name);
         }
       }
 

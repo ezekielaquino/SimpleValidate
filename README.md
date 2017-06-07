@@ -22,8 +22,11 @@ Simple: pass in a form element into `Validate()`. It will loop through all input
     <!-- You can specify the following with data attributes:
         data-minlength -> minimum number of characters
         data-maxlneght -> maximum number of characters
-        data-ignore -> Ignore validation, useful for e.g. honeypots, non-required fields
         data-name -> The label/name of the error, otherwise [name] will be used
+        required -> if omitted, ignore field validation
+
+        NOTE:
+        add `novalidate` to form to disable native html5 validation
      -->
     <fieldset>
         <label>Some input label</label>

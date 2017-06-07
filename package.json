@@ -1,6 +1,6 @@
 {
   "name": "simplevalidate",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Simple form validator that also exposes your user's shortcomings",
   "keywords": [
     "validate",
