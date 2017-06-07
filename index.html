@@ -307,7 +307,7 @@
         })
         .catch(function(errors) {
           console.warn('Whoops you got errors!');
-          console.debug(errors);
+          console.log(errors);
 
           for (const e of errors.inputs) {
             e.parentElement.classList.add('error');
