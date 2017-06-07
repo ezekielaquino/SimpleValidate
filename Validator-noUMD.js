@@ -16,6 +16,7 @@
     const formInputs = [...inputs, ...selects, ...textareas];
     const formData = {};
     const errors = new Set([]);
+    const errorInputs = new Set([]);
 
     const Validation = new Promise((resolve, reject) => {
       for (const input of formInputs) {
@@ -40,12 +41,17 @@
             if (_checkLength(input)) formData[key] = input.value;
           }
 
-          if (formData[key]) errors.delete(name);
-          else if (!errors.has(key) && input.hasAttribute('required')) errors.add(name);
+          if (formData[key]) {
+            errors.delete(name)
+            errorInputs.delete(input);
+          } else if (input.hasAttribute('required')) {
+            if (!errors.has(key)) errors.add(name);
+            errorInputs.add(input);
+          }
         }
       }
 
-      if (errors.size) reject(Array.from(errors));
+      if (errors.size) reject({ names: Array.from(errors), inputs: Array.from(errorInputs) });
       else resolve(formData);
     });
 
