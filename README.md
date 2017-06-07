@@ -20,7 +20,7 @@ Simple: pass in a form element into `Validate()`. It will loop through all input
 
 If there's an error it will return an object like so: try it yourself, console log the errors!
 
-```json
+```js
     {
         names: ["error-input-name1", "error-input-name2"],
         inputs: [inputDomNode, inputDomNode]
@@ -63,7 +63,8 @@ If there's an error it will return an object like so: try it yourself, console l
                 });
             })
             .catch((errors) => {
-                // INVALID! You get back an array of invalid input names
+                // INVALID! You get back an object with arrays of
+                // invalud input names and elems
                 for (const input of errors.inputs) {
                     input.classList.add('is-error');
 
