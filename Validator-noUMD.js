@@ -12,7 +12,8 @@
   window.Validate = function(form) {
     const inputs = form.querySelectorAll('input');
     const selects = form.querySelectorAll('select');
-    const formInputs = [...inputs, ...selects];
+    const textareas = form.querySelectorAll('textarea');
+    const formInputs = [...inputs, ...selects, ...textareas];
     const formData = {};
     const errors = new Set([]);
 
