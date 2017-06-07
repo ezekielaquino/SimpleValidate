@@ -18,6 +18,17 @@ Simple form validation that also exposes your user's shortcomings :D
 
 Simple: pass in a form element into `Validate()`. It will loop through all inputs and selects and returns a promise. If there's an error, then it will return the names of the inputs as an array; otherwise it will return the form data as an object.
 
+If there's an error it will return an object like so: try it yourself, console log the errors!
+
+```json
+    {
+        names: ["error-input-name1", "error-input-name2"],
+        inputs: [inputDomNode, inputDomNode]
+    }
+```
+
+### Example usage
+
 ```html
     <!-- You can specify the following with data attributes:
         data-minlength -> minimum number of characters
@@ -46,11 +57,21 @@ Simple: pass in a form element into `Validate()`. It will loop through all input
             .then((data) => {
                 // VALID! Do stuff here like...
                 // AJAX away the data, etc.
-                console.log(JSON.stringify(data));
+                fetch(url, {
+                    method: 'POST',
+                    body: JSON.stringify(data)
+                });
             })
-            .catch((error) => {
+            .catch((errors) => {
                 // INVALID! You get back an array of invalid input names
-                errors.innerHTML = error.join(', ');
+                for (const input of errors.inputs) {
+                    input.classList.add('is-error');
+
+                    // add some class to the parent <fieldset>
+                    input.parentElement.classList.add('whoa-this-input-got-an-error');
+                }
+
+                document.querySelector('errorMsg').innerHTML = errors.names.join(', ');
             });
     });
 ```

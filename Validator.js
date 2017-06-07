@@ -42,16 +42,22 @@
             if (_validateEmail(input.value)) formData[key] = input.value;
           } else if (type === 'url') {
             if (_validateURL(input.value)) formData[key] = input.value;
-          } else {
+          } 
+          else {
             if (_checkLength(input)) formData[key] = input.value;
           }
 
-          if (formData[key]) errors.delete(name);
-          else if (!errors.has(key) && input.hasAttribute('required')) errors.add(name);
+          if (formData[key]) {
+            errors.delete(name)
+            errorInputs.delete(input);
+          } else if (input.hasAttribute('required')) {
+            if (!errors.has(key)) errors.add(name);
+            errorInputs.add(input);
+          }
         }
       }
 
-      if (errors.size) reject(Array.from(errors));
+      if (errors.size) reject({ names: Array.from(errors), inputs: Array.from(errorInputs) });
       else resolve(formData);
     });
 
