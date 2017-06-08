@@ -32,7 +32,7 @@ If there's an error it will return an object like so: try it yourself, console l
 ```html
     <!-- You can specify the following with data attributes:
         data-minlength -> minimum number of characters
-        data-maxlneght -> maximum number of characters
+        data-maxlength -> maximum number of characters
         data-name -> The label/name of the error, otherwise [name] will be used
         required -> if omitted, ignore field validation
 

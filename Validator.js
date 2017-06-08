@@ -23,6 +23,7 @@
     const formInputs = [...inputs, ...selects, ...textareas];
     const formData = {};
     const errors = new Set([]);
+    const errorInputs = new Set([]);
 
     const Validation = new Promise((resolve, reject) => {
       for (const input of formInputs) {
