@@ -44,7 +44,7 @@
           if (formData[key]) {
             errors.delete(name)
             errorInputs.delete(input);
-          } else if (input.hasAttribute('required')) {
+          } else if (input.hasAttribute('required') && !input.dataset.ignore) {
             if (!errors.has(key)) errors.add(name);
             errorInputs.add(input);
           }
